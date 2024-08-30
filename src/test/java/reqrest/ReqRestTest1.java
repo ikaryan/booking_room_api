@@ -25,9 +25,9 @@ import static io.restassured.path.json.JsonPath.from;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class ReqRestTest {
+public class ReqRestTest1 {
 
-    Logger logger = Logger.getLogger(ReqRestTest.class.getName());
+    Logger logger = Logger.getLogger(ReqRestTest1.class.getName());
 
     @BeforeAll
     public static void setup() {

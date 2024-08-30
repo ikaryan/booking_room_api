@@ -7,51 +7,11 @@ import java.util.logging.Logger;
 
 public class RequestBody {
 
-    Logger logger = Logger.getLogger(BookingRoom.class.getName());
+    Logger logger = Logger.getLogger(BookingRoomTest.class.getName());
     static UserBookingRequest userBookingRequest = new UserBookingRequest();
     static BookingDates bookDates = new BookingDates();
 
-    @Test
-    public void deserialization() throws JsonProcessingException {
 
-        final ObjectMapper mapper = new ObjectMapper()
-                .enable(SerializationFeature.INDENT_OUTPUT);
-
-        var jsonString = """
-                 {
-                     "firstname": "Karlox",
-                     "lastname": "Allen",
-                     "totalprice": 111,
-                     "depositpaid": false,
-                     "bookingdates": {
-                         "checkin": "2025-01-01",
-                         "checkout": "2025-01-01"
-                     },
-                     "additionalneeds": "super bowls & Breakfast"
-                 }
-                """;
-
-        var deserialized = mapper.readValue(jsonString, UserBookingRequest.class);
-        logger.info("" + deserialized);
-    }
-
-    @Test
-    public void serialization() throws JsonProcessingException {
-
-        final ObjectMapper mapper = new ObjectMapper()
-                .enable(SerializationFeature.INDENT_OUTPUT);
-
-        userBookingRequest.setFirstname("pepito");
-        userBookingRequest.setLastname("Perez");
-        userBookingRequest.setTotalprice(120);
-        userBookingRequest.setDepositpaid(true);
-        bookDates.setCheckin("2025-01-01");
-        bookDates.setCheckout("2025-01-01");
-        userBookingRequest.setAdditionalneeds("super bowls & Breakfast");
-
-        var serialized = mapper.writeValueAsString(userBookingRequest);
-        logger.info(serialized);
-    }
 
     public static String createAuthToken = """
             {
@@ -75,7 +35,7 @@ public class RequestBody {
         return userBookingRequest;
     }
 
-    public static UserBookingRequest partialUpdateRegister(){
+    public static UserBookingRequest partialUpdateRegister() {
 
         userBookingRequest.setFirstname("James");
         userBookingRequest.setLastname("Allen");

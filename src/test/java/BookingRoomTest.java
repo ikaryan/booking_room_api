@@ -1,3 +1,6 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -13,10 +16,52 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class BookingRoom {
+public class BookingRoomTest {
 
-    Logger logger = Logger.getLogger(BookingRoom.class.getName());
+    Logger logger = Logger.getLogger(BookingRoomTest.class.getName());
     String requestBody;
+
+    @Test
+    public void deserialization() throws JsonProcessingException {
+
+        final ObjectMapper mapper = new ObjectMapper()
+                .enable(SerializationFeature.INDENT_OUTPUT);
+
+        var jsonString = """
+                 {
+                     "firstname": "Karlox",
+                     "lastname": "Allen",
+                     "totalprice": 111,
+                     "depositpaid": false,
+                     "bookingdates": {
+                         "checkin": "2025-01-01",
+                         "checkout": "2025-01-01"
+                     },
+                     "additionalneeds": "super bowls & Breakfast"
+                 }
+                """;
+
+        var deserialized = mapper.readValue(jsonString, UserBookingRequest.class);
+        logger.info("" + deserialized);
+    }
+
+    @Test
+    public void serialization() throws JsonProcessingException {
+
+        final ObjectMapper mapper = new ObjectMapper()
+                .enable(SerializationFeature.INDENT_OUTPUT);
+
+        RequestBody.userBookingRequest.setFirstname("pepito");
+        RequestBody.userBookingRequest.setLastname("Perez");
+        RequestBody.userBookingRequest.setTotalprice(120);
+        RequestBody.userBookingRequest.setDepositpaid(true);
+        RequestBody.bookDates.setCheckin("2025-01-01");
+        RequestBody.bookDates.setCheckout("2025-01-01");
+        RequestBody.userBookingRequest.setAdditionalneeds("super bowls & Breakfast");
+
+        var serialized = mapper.writeValueAsString(RequestBody.userBookingRequest);
+        logger.info(serialized);
+    }
 
     @BeforeAll
     public static void setup() {
