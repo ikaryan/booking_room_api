@@ -31,7 +31,7 @@ pipeline {
 //                       sh 'mvn clean verify -Dcucumber.filter.tags=@Sanity && @Test'
 //                     }
 //                 }
-            }
+//            }
             post {
                 always {
                     junit './target/surefire-reports/*.xml' // Collect JUnit test results
