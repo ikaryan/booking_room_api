@@ -19,9 +19,6 @@ pipeline {
         }
         stage('Test') {
             steps {
-                 sh 'mvn clean test'
-            }
-             steps {
                  script{
                      if(params.TYPE == 'Unit') {
                         sh 'mvn clean verify -D"cucumber.filter.tags=@test"'
