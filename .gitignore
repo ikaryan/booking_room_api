@@ -3,7 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-/logs
+logs/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -11,9 +11,12 @@ target/
 .idea/compiler.xml
 .idea/libraries/
 .idea/misc.xml
+.idea/
 *.iws
 *.iml
 *.ipr
+
+logs/browserstack-plugin.log
 
 ### Eclipse ###
 .apt_generated

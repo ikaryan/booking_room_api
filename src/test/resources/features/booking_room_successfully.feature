@@ -3,11 +3,13 @@ Feature: Check the process of booking room from API
   I need to check the process of booking of room
   thru the call of http methods was successfully
 
+  @test
   Scenario: create an Auth token
     Given that an auth token is created
       | username | password    |
       | admin    | password123 |
 
+  @sanity
   Scenario: See a specific reservation reservation
     Given that hotel requires to search a specific reservation
       | bookingnumber | search    |

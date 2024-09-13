@@ -19,6 +19,5 @@ public class BackendHooks {
                 .addHeader("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=")
                 .addHeader("Accept", "application/json")
                 .build();
-
     }
 }

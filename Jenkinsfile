@@ -21,17 +21,17 @@ pipeline {
             steps {
                  sh 'mvn clean test'
             }
-//             steps {
-//                 script{
-//                     if(params.TYPE == 'Unit') {
-//                        sh 'mvn clean verify -Dcucumber.filter.tags=@Test'
-//                     } else if(params.TYPE == 'Regression') {
-//                       sh 'mvn clean verify -Dcucumber.filter.tags=@Regression && @Test'
-//                     } else {
-//                       sh 'mvn clean verify -Dcucumber.filter.tags=@Sanity && @Test'
-//                     }
-//                 }
-//            }
+             steps {
+                 script{
+                     if(params.TYPE == 'Unit') {
+                        sh 'mvn clean verify -D"cucumber.filter.tags=@test"'
+                     } else if(params.TYPE == 'Regression') {
+                       sh 'mvn clean verify -D"cucumber.filter.tags=@regression"'
+                     } else {
+                       sh 'mvn clean verify -D"cucumber.filter.tags=@sanity"'
+                     }
+                 }
+            }
             post {
                 always {
                     junit '**/target/surefire-reports/*.xml' // Collect JUnit test results
@@ -44,7 +44,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             echo 'Build successful!'
